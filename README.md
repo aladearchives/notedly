@@ -1,15 +1,15 @@
 # notedly
-Notes App with React UI and GraphQL API connecting an Express Server to a GraphQL API
+Notes App. Sign up as a user and you can create, edit and delete notes. 
 
 ## Client
 React <br />
-React Router
-Styled Components
+React Router <br />
+Styled Components <br />
 Apollo Client
 
 ## Api
-GraphQL
-Mongo DB
-Express
-Node
+GraphQL <br />
+Mongo DB <br />
+Express <br />
+Node <br />
 Heroku Hosted
