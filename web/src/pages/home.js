@@ -1,6 +1,10 @@
 // import the required libraries
+import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import ReactMarkdown from 'react-markdown';
+
+import Button from '../components/Button';
+import NoteFeed from '../components/NoteFeed';
 
 // our GraphQL query, stored as a variable
 const GET_NOTES = gql`
@@ -33,21 +37,7 @@ const Home = () => {
     if (error) return <p>Error!</p>;
 
     //if the data is successful, display data in UI
-    return (
-        <div>
-            {data.noteFeed.notes.map(note => (
-                <article key={note.id}>
-                    <img
-                        src={note.author.avatar}
-                        alt={`${note.author.username} avatar`}
-                        height='50px'
-                    />{' '}
-                    {note.author.username} {note.createdAt} {note.favoriteCount}{' '}
-                    <ReactMarkdown source={note.content} />
-                </article>
-            ))}
-        </div>
-    );
+    return <NoteFeed notes={data.noteFeed.notes} />;
 };
 
 export default Home;
