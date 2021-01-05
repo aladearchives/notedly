@@ -21,7 +21,7 @@ const App = () => {
     return (
         <ApolloProvider client={client}>
             <GlobalStyle />
-           <Pages />
+            <Pages />
         </ApolloProvider>
     );
 };
