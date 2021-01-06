@@ -45,9 +45,13 @@ const SignUp = props => {
         document.title = 'Sign Up for Notedly';
     });
 
+    const client = useApolloClient();
+
     const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
         onCompleted: data => {
             localStorage.setItem('token', data.signUp);
+            // update the local cache
+            client.writeData({ data: {isLoggedIn: true}});
             props.history.push('/');
         }
     });

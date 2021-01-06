@@ -32,6 +32,14 @@ const client = new ApolloClient({
     connectToDevTools: true
 });
 
+// check for a local token
+const data = {
+    isLoggedIn: !!localStorage.getItem('token')
+};
+
+//write the cache data on initial load
+cache.writeData({data});
+
 const App = () => {
     return (
         <ApolloProvider client={client}>
