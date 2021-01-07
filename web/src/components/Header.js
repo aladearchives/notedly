@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import logo from '../img/logo.svg';
 import { useQuery, gql } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import ButtonAsLink from './ButtonAsLink';
 
 // local query
 const IS_LOGGED_IN = gql`
@@ -35,7 +36,8 @@ const UserState = styled.div`
 
 const Header = props => {
     // query hook for user logged in state
-    const { data } = useQuery(IS_LOGGED_IN);
+    // Including the client for referencing the apollo store
+    const { data, client } = useQuery(IS_LOGGED_IN);
 
     return (
         <HeaderBar>
@@ -44,7 +46,19 @@ const Header = props => {
             {/* if logged in display a logout link, else sign in options */}
             <UserState>
                 {data.isLoggedIn ? (
-                    <p>Log Out</p>
+                    <ButtonAsLink
+                        onClick={() => {
+                            // remove the token
+                            localStorage.removeItem('token');
+                            // clear app cache
+                            client.resetStore();
+                            // update local store
+                            client.writeData({ data: { isLoggedIn: false } });
+                            // redirect user to the homepage
+                            props.history.push('/');
+                        }}>
+                        Logout
+                    </ButtonAsLink>
                 ) : (
                         <p>
                             <Link to={'/signin'}>Sign In</Link> or {' '}
@@ -56,4 +70,4 @@ const Header = props => {
     );
 };
 
-export default Header;
+export default withRouter(Header);
