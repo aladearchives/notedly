@@ -1,6 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import {useQuery, gql}
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { useQuery, gql } from '@apollo/client';
+
+const iS_LOGGED_IN = gql`
+    {
+        isLoggedIn @client
+    }
+`;
 
 // import shared layout component
 import Layout from '../components/Layout';
@@ -18,8 +24,8 @@ const Pages = () => {
         <Router>
             <Layout>
                 <Route exact path='/' component={Home} />
-                <Route path='/mynotes' component={MyNotes} />
-                <Route path='/favorites' component={Favorites} />
+                <PrivateRoute path='/mynotes' component={MyNotes} />
+                <PrivateRoute path='/favorites' component={Favorites} />
                 <Route path="/note/:id" component={NotePage} />
                 <Route path='/signup' component={SignUp} />
                 <Route path='/signin' component={SignIn} />
@@ -28,4 +34,28 @@ const Pages = () => {
     );
 };
 
-export default Pages;
+const PrivateRoute = ({ component: Component, ...rest }) => {
+    const { loading, error, data } = useQuery(IS_LOGGED_IN);
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error!</p>;
+    // if the user is logged in, route them to the requested component
+    // else redirect them to the sign-in page
+    return (
+        <Route
+            {...rest}
+            render={props =>
+                data.isLoggedIn === true ? (
+                    <Component {...props} />
+                ) : (
+                        <Redirect
+                            to={{
+                                pathname: '/signin',
+                                state: { from: props.location }
+                            }}
+                        />
+                    )
+            }
+        />
+    )
+
+    export default Pages;
