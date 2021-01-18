@@ -1,7 +1,7 @@
 # notedly
 Notes App. Sign up as a user and you can create, edit and delete notes. 
 
-## Client
+## Client Side
 React <br />
 React Router <br />
 Styled Components <br />
