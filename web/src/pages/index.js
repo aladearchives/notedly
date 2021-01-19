@@ -18,6 +18,7 @@ import Favorites from './favorites';
 import NotePage from './note';
 import SignUp from './signup';
 import SignIn from './signin';
+import NewNote from './new';
 
 const Pages = () => {
     return (
@@ -26,6 +27,7 @@ const Pages = () => {
                 <Route exact path='/' component={Home} />
                 <PrivateRoute path='/mynotes' component={MyNotes} />
                 <PrivateRoute path='/favorites' component={Favorites} />
+                <PrivateRoute path="/new" component={NewNote} />
                 <Route path="/note/:id" component={NotePage} />
                 <Route path='/signup' component={SignUp} />
                 <Route path='/signin' component={SignIn} />
