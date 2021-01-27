@@ -9,15 +9,6 @@ const Note = ({ note }) => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error!</p>;
     return (
-        // <article>
-        //     <img
-        //         src={note.author.avatar}
-        //         alt={`${note.author.username} avatar`}
-        //         height="50px"
-        //     />{' '}
-        //     {note.author.username} {note.createdAt} {note.favoriteCount}{' '}
-        //     <ReactMarkdown source={note.content} />
-        // </article>
         <StyledNote>
             <MetaData>
                 <MetaInfo>

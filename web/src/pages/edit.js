@@ -31,7 +31,7 @@ const EditNote = props => {
         return <p>You do not have access to edit this note</p>;
     }
     // if the data is successful, display the data in our UI
-    return <NoteForm content={data.note.content} />;
+    return <NoteForm content={data.note.content} action={editNote} />;
 };
 
 export default EditNote;
