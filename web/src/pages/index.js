@@ -21,7 +21,7 @@ import SignIn from './signin';
 import NewNote from './new';
 import EditNote from './edit';
 
-const Pages = () => {
+export default Pages = () => {
     return (
         <Router>
             <Layout>
@@ -61,5 +61,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             }
         />
     )
-
-    export default Pages;
+};

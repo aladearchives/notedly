@@ -83,7 +83,7 @@ const GET_MY_FAVORITES = gql`
 `;
 
 // add GET_ME to our queries
-const SET_ME = gql`
+const GET_ME = gql`
     query me {
         me {
             id
