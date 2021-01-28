@@ -2,12 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 
-const iS_LOGGED_IN = gql`
-    {
-        isLoggedIn @client
-    }
-`;
-
 // import shared layout component
 import Layout from '../components/Layout';
 
@@ -21,7 +15,13 @@ import SignIn from './signin';
 import NewNote from './new';
 import EditNote from './edit';
 
-export default Pages = () => {
+const IS_LOGGED_IN = gql`
+    {
+        isLoggedIn @client
+    }
+`;
+
+const Pages = () => {
     return (
         <Router>
             <Layout>
@@ -61,4 +61,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             }
         />
     )
-};
+}
+
+export default Pages;
